@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>TODO List</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Created At</th>
+        <th>Deadline</th>
+        <th>Done</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.content }}</td>
+          <td>{{ task.created_at }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.is_done }}</td>
+          <td>
+            {% for tag in task.tags.all %}
+              {{ tag.name }}
+            {% empty %}
+              No tags
+            {% endfor %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No tasks yet</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
